@@ -1,0 +1,14 @@
+@import '~antd/dist/antd.css';
+
+.menubar{
+    overflow: hidden;
+    font-family:'DB Adman X';
+    font-size: unset;
+   
+}
+
+.menubar span{
+    font-size: 2.8ch;
+    font-family:'DB Adman X';
+    color: white;
+}
