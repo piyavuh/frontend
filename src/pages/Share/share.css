@@ -4,3 +4,75 @@
 .ant-form-item-label {
    width: 80px;
 }
+.modal-content {
+    font-family: "DB Adman X";
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px 0px 0px 10px;
+    width: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: auto;
+  }
+  .modal-header {
+    margin: auto;
+    width: auto;
+    font-size: 3ch;
+    font-family: "DB Adman X";
+    padding: 10px 0px 0px 10px;
+    background-color: #0080ff;
+    color: white;
+    height: 2.75rem;
+    border: solid thick #0080ff;
+    border-radius: 1em 1em 0em 0em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .t-content {
+    font-family: "DB Adman X";
+    position: relative;
+    background-color: #fefefe;
+    padding: 10px 0px 0px 10px;
+    width: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: auto;
+    margin-bottom: 60px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  .t-header {
+    margin-left: 40px;
+    margin-right: 40px;
+    width: auto;
+    font-size: 3ch;
+    font-family: "DB Adman X";
+    padding: 10px 0px 0px 10px;
+    background-color: #0080ff;
+    color: white;
+    height: 2.75rem;
+    border: solid thick #0080ff;
+    border-radius: 1em 1em 0em 0em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px 0px 0px 10px;
+    width: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .modal-header {
+    font-size: 3ch;
+    padding: 10px 0px 0px 10px;
+    background-color: #0080ff;
+    color: white;
+    height: 2.75rem;
+    border: solid thick #0080ff;
+    border-radius: 1em 1em 0em 0em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .centle{
+      margin-left: 50%;
+      margin-bottom: 5%;
+  }

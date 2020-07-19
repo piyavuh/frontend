@@ -8,8 +8,10 @@ import StockPage from "./pages/Stock";
 import MainNavigation from "./components/Navigation/MainNavigation";
 
 import Add_officerPage from "./pages/Officer/AddOfficer";
-
+import EditMember from "./pages/Members/EditMember"
 import AuthContext from "./context/auth-context";
+import Buy_share from './pages/Share/BuyShare';
+import Sell_share from './pages/Share/SellShare';
 
 import "./App.css";
 
@@ -55,6 +57,9 @@ class App extends Component {
                 <Route path="/register" component={RegisterPage} />
                 <Route path="/stocks" component={StockPage} />
                 <Route path="/add_officer" component={Add_officerPage} />
+                <Route path="/editMember" component={EditMember} />
+                <Route path="/buy_share" component={Buy_share} />
+                <Route path="/sell_share" component={Sell_share} />
                 {this.state.token && (
                   <Route path="/sellingStocks" component={SellingStockPage} />
                 )}
@@ -68,4 +73,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export  default App;

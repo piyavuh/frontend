@@ -7,6 +7,7 @@ import styled from 'styled-components';
 const { Header, Content } = Layout;
 export default class EditMember extends Component {
     render() {
+        
         return (
             <div>
                 <Layout>

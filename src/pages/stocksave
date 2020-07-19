@@ -4,11 +4,12 @@ import Modal from "../components/Modal/Modal";
 import StockList from "../components/Stocks/StockList/StockList";
 import Backdrop from "../components/backdrop/backdrop/backdrop";
 import "./Stock.css";
-import { Table, Button } from "antd";
+
+
 class StocksPage extends Component {
   state = {
     creating: false,
-    stocks: [],
+    stocks: []
   };
 
   static contextType = AuthContext;
@@ -32,11 +33,14 @@ class StocksPage extends Component {
     const value = +this.valueElRef.current.value;
     const date = this.dateElRef.current.value;
 
-    if (value <= 0 || date.trim().length === 0) {
+    if (
+      value <= 0 ||
+      date.trim().length === 0 
+    ) {
       return;
     }
 
-    const stock = { value, date };
+    const stock = {value, date };
     console.log(stock);
 
     const requestBody = {
@@ -49,30 +53,30 @@ class StocksPage extends Component {
              
             }
           }
-        `,
+        `
     };
 
     const token = this.context.token;
 
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
+    fetch('http://localhost:8000/graphql', {
+      method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
     })
-      .then((res) => {
+      .then(res => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed!");
+          throw new Error('Failed!');
         }
         return res.json();
       })
-      .then((resData) => {
+      .then(resData => {
         console.log(resData);
         this.fetchStocks();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -92,51 +96,32 @@ class StocksPage extends Component {
              
             }
           }
-        `,
+        `
     };
 
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
+    fetch('http://localhost:8000/graphql', {
+      method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
-        "Content-Type": "application/json",
-      },
+        'Content-Type': 'application/json'
+      }
     })
-      .then((res) => {
+      .then(res => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed!");
+          throw new Error('Failed!');
         }
         return res.json();
       })
-      .then((resData) => {
+      .then(resData => {
         const stocks = resData.data.stocks;
         this.setState({ stocks: stocks });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }
 
   render() {
-  
-  
-    const columns = [
-      {
-        title: "_id",
-        dataIndex: "_id",
-        key: "_id",
-      },
-      {
-        title: "value",
-        dataIndex: "value",
-        key: "value",
-      }, {
-        title: "date",
-        dataIndex: "date",
-        key: "date",
-      },
-    ];
-    
     return (
       <React.Fragment>
         {this.state.creating && <Backdrop />}
@@ -164,12 +149,11 @@ class StocksPage extends Component {
           <div className="stocks-control">
             <p>Share your own Stocks!</p>
             <button className="btn" onClick={this.startCreateStockHandler}>
-              / Create Stock
+              Create Stock
             </button>
           </div>
         )}
-        <StockList stocks={this.state.stocks} />
-        <Table dataSource={this.state.stocks} columns={columns} />;
+        <StockList stocks={this.state.stocks}/>
       </React.Fragment>
     );
   }

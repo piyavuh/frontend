@@ -15,7 +15,7 @@ const columns = [
     
   },
   {
-    title: 'รหัสสมาชิก',
+    title: 'รหัสสมาชิก', 
     dataIndex: 'member_code',
     className:'table_style'
     
