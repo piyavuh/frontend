@@ -1,0 +1,36 @@
+.modal-content {
+
+    font-family:"DB Adman X";
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px 0px 0px 10px;
+    width: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    height:auto;
+    
+    
+    }
+    .modal-header {
+    margin: auto;
+    width: auto;
+    font-size: 3ch;
+    font-family:"DB Adman X";
+    padding: 10px 0px 0px 10px;
+    background-color: #0080FF;
+    color: white;
+    height:2.75rem;
+    border: solid thick #0080FF;
+    border-radius: 1em 1em 0em 0em;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+    
+    .cal_officer_bot
+    {
+        background-color: #4CAF50;
+        color: white;
+        border: #4CAF50;
+        margin-left: 10px;
+        font-size: 3.5ch;
+        margin-bottom: 20px;
+    }

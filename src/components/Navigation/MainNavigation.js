@@ -15,14 +15,14 @@ const mainNavigation = (props) => (
           </div>
           <nav className="main-navigation__items">
             <ul>
+              <li>
+                <NavLink to="/stocks">dashboard</NavLink>
+              </li>
               {!context.token && (
                 <li>
                   <NavLink to="/login">เข้าสู่ระบบ</NavLink>
                 </li>
               )}
-              <li>
-                <NavLink to="/add_officer">เพิ่มบุคลากร </NavLink>
-              </li>
 
               {!context.token && (
                 <React.Fragment>
@@ -49,12 +49,32 @@ const mainNavigation = (props) => (
                   </li>
                 </React.Fragment>
               )}
+              {context.token && (
+                <React.Fragment>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                      การจัดกาบุคลากร
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/add_officer">เพิ่มบุคลากร</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/edit_officer">ตรวจสอบบุคลากร</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/cal_officer">คำนวณเงินเดือน</NavLink>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              )}
 
               {context.token && (
                 <React.Fragment>
                   <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">
-                    ซื้อ-ขายหุ้น
+                      ซื้อ-ขายหุ้น
                     </a>
                     <div class="dropdown-content">
                       <a>
@@ -67,17 +87,69 @@ const mainNavigation = (props) => (
                   </li>
                 </React.Fragment>
               )}
-
-              <li>
-                <NavLink to="/stocks">ชื้อหุ้น</NavLink>
-              </li>
               {context.token && (
                 <React.Fragment>
                   <li>
-                    <NavLink to="/">ขายหุ้น</NavLink>
+                    <NavLink to="/DividendandAvgReturnmoney">
+                      เงินปันผล/เงินเฉลี่ยคืน
+                    </NavLink>
                   </li>
+                </React.Fragment>
+              )}
+              {context.token && (
+                <React.Fragment>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                      หนี้สิน-เงินคงค้าง
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/accrual">เงินคงค้างสหกรณ์</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/debt">หนี้สินสมาชิกสหกรณ์</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/blacklist">แบล็คลิส</NavLink>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && (
+                <React.Fragment>
                   <li>
-                    <button onClick={context.logout}>ออกจากระบบ</button>
+                    <NavLink to="/receipt">การเงิน</NavLink>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && (
+                <React.Fragment>
+                  <li>
+                    <NavLink to="/report">การออกรายงาน</NavLink>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && (
+                <React.Fragment>
+                  <li>
+                    <NavLink to="/approvey">การอนุมัติ</NavLink>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && (
+                <React.Fragment>
+                  <li>
+                    <NavLink to="/access-history">ประวัติการข้าใช้งาน</NavLink>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && (
+                <React.Fragment>
+                  <li>
+                    <NavLink to="/stocks">
+                      <button onClick={context.logout}>ออกจากระบบ</button>
+                    </NavLink>
                   </li>
                 </React.Fragment>
               )}

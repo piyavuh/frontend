@@ -127,13 +127,12 @@ class RegisterPage extends Component {
     if (Username.trim().length === 0 || Password.trim().length === 0) {
       return;
     }
-
-    let requestBody = {
+    let requestBodyautoIds = {
       query: `
-      mutation {
-        createUser(userInput: {First_name: "${First_name}", Last_name: "${Last_name}", Sex: "${Sex}", Birth_Day: "${Birth_Day}", ID_card: "${ID_card}", Email: "${Email}", Username: "${Username}", Password: "${Password}", Tell_number: "${Tell_number}", Tell_number2: "${Tell_number2}", Facebook: "${Facebook}", Line: "${Line}"}) {
+      query{
+        autoIds{
           _id
-          Username
+          memberId
         }
       }
       
@@ -142,7 +141,7 @@ class RegisterPage extends Component {
 
     fetch("http://localhost:8000/graphql", {
       method: "POST",
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify(requestBodyautoIds),
       headers: {
         "Content-Type": "application/json",
       },
@@ -154,24 +153,29 @@ class RegisterPage extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .then(() => {
-        const requestBodyquery = {
+        
+        var str = "" + resData.data.autoIds[0].memberId;
+        var pad = "000000";
+        const ans = pad.substring(0, pad.length - str.length) + str;
+        
+
+        console.log(typeof ans);
+
+        let requestBody = {
           query: `
-                query{
-                  oneuser(Username: "${Username}") {
-                    _id
-                  }
-                }
-                `,
+          mutation {
+            createUser(userInput: {id:"${ans}",First_name: "${First_name}", Last_name: "${Last_name}", Sex: "${Sex}", Birth_Day: "${Birth_Day}", ID_card: "${ID_card}", Email: "${Email}", Username: "${Username}", Password: "${Password}", Tell_number: "${Tell_number}", Tell_number2: "${Tell_number2}", Facebook: "${Facebook}", Line: "${Line}"}) {
+              _id
+              Username
+            }
+          }
+          
+          `,
         };
+    
         fetch("http://localhost:8000/graphql", {
           method: "POST",
-          body: JSON.stringify(requestBodyquery),
+          body: JSON.stringify(requestBody),
           headers: {
             "Content-Type": "application/json",
           },
@@ -183,19 +187,24 @@ class RegisterPage extends Component {
             return res.json();
           })
           .then((resData) => {
-            console.log(resData.data.oneuser._id);
-            let requestBodyfarm = {
+            console.log(resData);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .then(() => {
+            const requestBodyquery = {
               query: `
-          mutation {
-            createFarm(farmInput: {Farm_number: "${Farm_number}", Farm_Village: "${Farm_Village}", Farm_Road: "${Farm_Road}", Farm_Village_number:"${Farm_Village_number}", Farm_alley: "${Farm_alley}", Farm_postcode: "${Farm_postcode}", Farm_canton: "${Farm_canton}",Farm_District: "${Farm_District}", Farm_Province: "${Farm_Province}", Farm_owner: "${resData.data.oneuser._id}"}) {
-              Farm_number
-            }
-          }
-          `,
+                    query{
+                      oneuser(Username: "${Username}") {
+                        _id
+                      }
+                    }
+                    `,
             };
             fetch("http://localhost:8000/graphql", {
               method: "POST",
-              body: JSON.stringify(requestBodyfarm),
+              body: JSON.stringify(requestBodyquery),
               headers: {
                 "Content-Type": "application/json",
               },
@@ -207,16 +216,48 @@ class RegisterPage extends Component {
                 return res.json();
               })
               .then((resData) => {
-                console.log(resData);
+                console.log(resData.data.oneuser._id);
+                let requestBodyfarm = {
+                  query: `
+              mutation {
+                createFarm(farmInput: {Farm_number: "${Farm_number}", Farm_Village: "${Farm_Village}", Farm_Road: "${Farm_Road}", Farm_Village_number:"${Farm_Village_number}", Farm_alley: "${Farm_alley}", Farm_postcode: "${Farm_postcode}", Farm_canton: "${Farm_canton}",Farm_District: "${Farm_District}", Farm_Province: "${Farm_Province}", Farm_owner: "${resData.data.oneuser._id}"}) {
+                  Farm_number
+                }
+              }
+              `,
+                };
+                fetch("http://localhost:8000/graphql", {
+                  method: "POST",
+                  body: JSON.stringify(requestBodyfarm),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                })
+                  .then((res) => {
+                    if (res.status !== 200 && res.status !== 201) {
+                      throw new Error("Failed!");
+                    }
+                    return res.json();
+                  })
+                  .then((resData) => {
+                    console.log(resData);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               })
               .catch((err) => {
                 console.log(err);
               });
-          })
-          .catch((err) => {
-            console.log(err);
           });
-      });
+
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+    
   };
 
   render() {

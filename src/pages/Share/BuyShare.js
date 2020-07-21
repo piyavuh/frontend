@@ -21,7 +21,8 @@ const style = { padding: "0px 0px" };
 class BuySharePage extends Component {
   state = {
     creating: false,
-    users: [],
+    newshares: [],
+    sumnewshares: [],
   };
 
   static contextType = AuthContext;
@@ -29,19 +30,17 @@ class BuySharePage extends Component {
   constructor(props) {
     super(props);
     this.First_nameEl = React.createRef();
-    this.ValueEl = React.createRef();
+    this.ValueshareEl = React.createRef();
     this.CountEl = React.createRef();
-    this.Num_startEl = React.createRef();
-    this.DateEl = React.createRef();
+    this.DateDateshareEl = React.createRef();
   }
 
   submitHandler = (props) => {
     props.preventDefault();
     const First_name = this.First_nameEl.current.value;
-    const Value = +this.ValueEl.current.Value;
+    const Valueshare = +this.ValueshareEl.current.value;
     const Count = +this.CountEl.current.value;
-    const Num_start = +this.Num_startEl.current.value;
-    const Date = this.DateEl.current.value;
+    const Dateshare = this.DateDateshareEl.current.value;
 
     const requestBodyoneshare = {
       query: `
@@ -52,6 +51,9 @@ class BuySharePage extends Component {
                         Value
                         Count
                         Num_start
+                        Share_owner{
+                          _id
+                        }
                     }
                   }
            
@@ -71,11 +73,106 @@ class BuySharePage extends Component {
         return res.json();
       })
       .then((resData) => {
-          console.log(resData.data.oneshare._id)
-          console.log(resData.data.oneshare.Num_start)
-          console.log(resData.data.oneshare.Share_owner)
-          
-        
+        console.log(resData);
+        const requestupdateShare = {
+          query: `
+            
+            mutation {
+              updateShare( shareId: "${resData.data.oneshare._id}",shareInput: {Value: ${Valueshare}, Count: ${Count}, Num_start: ${resData.data.oneshare.Num_start}, Date: "${Dateshare}", Status:true, Share_owner: "${resData.data.oneshare.Share_owner._id}"}) {
+                Status
+              }
+            }
+                 
+                `,
+        };
+
+        fetch("http://localhost:8000/graphql", {
+          method: "POST",
+          body: JSON.stringify(requestupdateShare),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            if (res.status !== 200 && res.status !== 201) {
+              throw new Error("Failed!");
+            }
+            return res.json();
+          })
+          .then((resData) => {})
+          .catch((err) => {
+            console.log(err);
+          });
+
+        const newNumstart =
+          resData.data.oneshare.Num_start + resData.data.oneshare.Count;
+
+        let requestBodyfarm = {
+          query: `
+          query{
+            oneuser_name(First_name:"${First_name}"){
+              _id
+            }
+          }
+                  `,
+        };
+        fetch("http://localhost:8000/graphql", {
+          method: "POST",
+          body: JSON.stringify(requestBodyfarm),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            if (res.status !== 200 && res.status !== 201) {
+              throw new Error("Failed!");
+            }
+            return res.json();
+          })
+          .then((resData) => {
+            let requestBodyfarm = {
+              query: `
+                        mutation {
+                            createShare(shareInput: {Value: ${Valueshare}, Count: ${Count}, Num_start: ${newNumstart}, Date: "${Dateshare}", Status:false, Share_owner: "${resData.data.oneuser_name._id}"}) {
+                            Value
+                            Count
+                            Num_start
+                            }
+                        }  
+                      `,
+            };
+            fetch("http://localhost:8000/graphql", {
+              method: "POST",
+              body: JSON.stringify(requestBodyfarm),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((res) => {
+                if (res.status !== 200 && res.status !== 201) {
+                  throw new Error("Failed!");
+                }
+                return res.json();
+              })
+              .then((resData) => {
+                console.log(resData);
+                const shares = resData.data.createShare;
+                this.setState({ newshares: shares });
+                const sumShare =
+                  resData.data.createShare.Value * resData.data.createShare.Count;
+                this.setState({ sumnewshares: sumShare });
+    
+                console.log(shares);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+      
       })
       .catch((err) => {
         console.log(err);
@@ -192,11 +289,11 @@ class BuySharePage extends Component {
                     </Col>
                     <Col className="gutter-row" span={6}>
                       <div className="form-control">
-                        <label >Date</label>
+                        <label>Date</label>
                         <input
                           type="datetime-local"
-                          id="Date"
-                          ref={this.DateEl}
+                          id="Dateshare"
+                          ref={this.DateDateshareEl}
                         />
                       </div>
                     </Col>
@@ -232,8 +329,8 @@ class BuySharePage extends Component {
                               <Form.Item name="per_share_buy" label="หุ้นละ">
                                 <input
                                   className="from-input"
-                                  id="Value"
-                                  ref={this.ValueEl}
+                                  id="Valueshare"
+                                  ref={this.ValueshareEl}
                                   placeholder=""
                                 ></input>
                                 <label style={{ marginLeft: "20px" }}>
@@ -268,10 +365,8 @@ class BuySharePage extends Component {
                                 name="totalmoney_share_buy"
                                 label="รวมเป็นเงิน "
                               >
-                                <Input
-                                  placeholder=" "
-                                  style={{ width: "60%" }}
-                                />
+                                {this.state.sumnewshares}
+
                                 <label style={{ marginLeft: "20px" }}>
                                   บาท
                                 </label>
@@ -282,12 +377,7 @@ class BuySharePage extends Component {
                           <Col className="gutter-row" span={7}>
                             <div style={style}>
                               <Form.Item name="no_share_buy" label="หุ้นลขที่ ">
-                                <input
-                                  className="from-input"
-                                  id="Num_start"
-                                  ref={this.Num_startEl}
-                                  placeholder=""
-                                ></input>
+                                {this.state.newshares.Num_start}
                               </Form.Item>
                             </div>
                           </Col>
@@ -297,10 +387,9 @@ class BuySharePage extends Component {
                                 name="to_no_share_buy"
                                 label="ถึงหุ้นลขที่ "
                               >
-                                <Input
-                                  placeholder=" "
-                                  style={{ width: "60%" }}
-                                />
+                                {this.state.newshares.Num_start +
+                                  this.state.newshares.Count -
+                                  1}
                               </Form.Item>
                             </div>
                           </Col>
