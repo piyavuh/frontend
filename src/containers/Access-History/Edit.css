@@ -1,0 +1,15 @@
+.table_style{
+    font-size: 3ch;
+    font-family:"DB Adman X";
+    text-align: center;  
+}
+
+.ant-table-thead > tr > th {
+    color:rgb(36, 34, 34);
+    font-weight: bolder;
+    text-align: center;
+    background: #818181;
+    border-bottom: 1px solid #818181;
+    -webkit-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+}

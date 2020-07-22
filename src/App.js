@@ -29,6 +29,28 @@ import Report from "./pages/Report/Report";
 import Approve from "./pages/Approve/Approve";
 import AccessHistory from "./pages/Access-History/AccessHistory";
 
+
+import BuyCowCash from './pages/General-product/BuyCow/BuyCowCash';
+import BuyCowCredit from './pages/General-product/BuyCow/BuyCowCredit';
+import SellCowFatten from './pages/General-product/SellCow/SellCowFatten';
+import SellCowSlice from './pages/General-product/SellCow/SellCowSlice';
+import SemenCowRegistered from './pages/General-product/SemenCow/SemenCowRegistered';
+import SemeCowCash from './pages/General-product/SemenCow/SemeCowCash';
+import SemeCowCredit from './pages/General-product/SemenCow/SemeCowCredit';
+import FoodCowRegistered from './pages/General-product/FoodCow/FoodCowRegistered';
+import FoodCowCash from './pages/General-product/FoodCow/FoodCowCash';
+import FoodCowCredit from './pages/General-product/FoodCow/FoodCowCredit';
+import ImportMedicine from './pages/General-product/MedicineCow/ImportMedicine';
+import MedicineCowRegistered from './pages/General-product/MedicineCow/Medicineregistered';
+import MedicineCowCash from './pages/General-product/MedicineCow/MedicineCowCash';
+import MedicineCowCredit from './pages/General-product/MedicineCow/MedicineCowCredit';
+import Equipmentfarmregistered from './pages/General-product/Farm-equipment/equipmentregistered';
+import Equipmentfarmcash from './pages/General-product/Farm-equipment/equipmentcash';
+import Equipmentfarmcredit from './pages/General-product/Farm-equipment/equipmentcredit';
+
+
+
+
 import "./App.css";
 
 
@@ -150,6 +172,25 @@ class App extends Component {
                 <Route path="/receipt" component={Receipt} />
                 <Route path="/approve" component={Approve} />
                 <Route path="/access-history" component={AccessHistory} />
+
+                <Route path = "/buycow-cash" component = {BuyCowCash}/>
+                <Route path = "/buycow-credit" component = {BuyCowCredit}/>
+                <Route path = "/sellcow-fatten" component = {SellCowFatten}/>
+                <Route path = "/sellcow-slice" component = {SellCowSlice}/>
+                <Route path = "/semencow-registered" component ={SemenCowRegistered}/>
+                <Route path = "/semencow-cash" component = {SemeCowCash}/>
+                <Route path = "/semencow-credit" component = {SemeCowCredit}/>
+                <Route path = "/foodcow-registered" component = {FoodCowRegistered}/>
+                <Route path = "/foodcow-cash" component = {FoodCowCash}/>
+                <Route path = "/foodcow-credit" component = {FoodCowCredit}/>
+                <Route path = "/medicinecow-import" component = {ImportMedicine}/>
+                <Route path = "/medicinecow-registered" component = {MedicineCowRegistered}/>
+                <Route path = "/medicinecow-cash" component = {MedicineCowCash}/>
+                <Route path = "/medicinecow-credit" component = {MedicineCowCredit}/>
+                <Route path = "/equipmentfarm-registered" component = {Equipmentfarmregistered}/>
+                <Route path = "/equipmentfarm-cash" component = {Equipmentfarmcash}/>
+                <Route path = "/equipmentfarm-credit" component = {Equipmentfarmcredit}/>
+              
                 {this.state.token && (
                   <Route path="/sellingStocks" component={SellingStockPage} />
                 )}

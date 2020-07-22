@@ -1,0 +1,20 @@
+.table_style{
+    font-size: 3ch;
+    text-align: center;  
+}
+
+.ant-table table {
+    font-size: 3ch;
+    width: 100%;
+    text-align: center;
+    border-radius: 2px 2px 0 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.ant-empty-description {
+    font-size: 3ch;
+}
+
+.ant-form-horizontal .ant-form-item-label {
+    width: 140px;
+}

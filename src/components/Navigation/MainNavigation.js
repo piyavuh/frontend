@@ -49,6 +49,127 @@ const mainNavigation = (props) => (
                   </li>
                 </React.Fragment>
               )}
+               {context.token && context.positionId == "finance" && (
+                <React.Fragment>
+               
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                    ซื้อ-ขายหุ้น
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                      <NavLink to="/buy_share">ซื้อหุ้น</NavLink>
+                      </a>
+                      <a>
+                      <NavLink to="/sell_share">ขายหุ้น</NavLink>
+                      </a>
+                      <a>
+                      <NavLink to="/info_share">ข้อมูลหุ้น</NavLink>
+                  </a>
+                    </div>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                    ซื้อโค
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/buycow-cash">ซื้อโคเงินสด</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/buycow-credit">ซื้อโคสินเชื้อ</NavLink>
+                      </a>
+                    </div>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                    ขายโค
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/sellcow-fatten">ขายเข้าขุน</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/sellcow-slice">ขายเข้าเชือด</NavLink>
+                      </a>
+                    </div>
+                  </li>
+                  
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                    น้ำเชื้อโค
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/semencow-registered">ลงทะเบียนน้ำเชื้อโค</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/semencow-cash">ซื้อน้ำเชื้อเงินสด</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/semencow-credit">ซื้อน้ำเชื้อสินเชื้อ</NavLink>
+                      </a>
+                    </div>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                    อาหารสัตว์
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/foodcow-registered">ลงทะเบียนอาหารสัตว์</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/foodcow-cash">ซื้ออาหารสัตว์เงินสด</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/foodcow-credit">ซื้ออาหารสัตว์สินเชื้อ</NavLink>
+                      </a>
+                    </div>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                    ยารักษาโรคโค
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/medicinecow-registered">ลงทะเบียนยา</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/medicinecow-import">การนำเข้ายา</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/medicinecow-cash">ซื้อยารักษาโรคโคเงินสด</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/medicinecow-credit">ซื้อยารักษาโรคสินเชื่อ</NavLink>
+                      </a>
+                    </div>
+                  </li>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                    วัสดุ/อุปกรณ์
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/equipmentfarm-registered">ลงทะเบียนวัสด/อุปกรณ์</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/equipmentfarm-cash">ซื้ออุปกรณ์ในฟาร์มเงินสด</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/equipmentfarm-credit">ซื้ออุปกรณ์ในฟาร์มสินเชื่อ</NavLink>
+                      </a>
+                    </div>
+                  </li>
+
+                </React.Fragment>
+              )}
+
               {context.token && context.positionId == "admin" && (
                 <React.Fragment>
                   <li class="dropdown">
@@ -127,26 +248,7 @@ const mainNavigation = (props) => (
                 </React.Fragment>
               )}
 
-              {context.token && context.positionId == "finance" && (
-                <React.Fragment>
-                  <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">
-                      ซื้อ-ขายหุ้น
-                    </a>
-                    <div class="dropdown-content">
-                      <a>
-                        <NavLink to="/buy_share">ซื้อหุ้น</NavLink>
-                      </a>
-                      <a>
-                        <NavLink to="/sell_share">ขายหุ้น</NavLink>
-                      </a>
-                      <a>
-                        <NavLink to="/info_share">ข้อมูลหุ้น</NavLink>
-                      </a>
-                    </div>
-                  </li>
-                </React.Fragment>
-              )}
+             
               {context.token && context.positionId == "admin" && (
                 <React.Fragment>
                   <li class="dropdown">
@@ -225,7 +327,7 @@ const mainNavigation = (props) => (
                   </li>
                 </React.Fragment>
               )}
-              {context.token && context.positionId == "manager" &&  (
+              {context.token && context.positionId == "manager" && (
                 <React.Fragment>
                   <li>
                     <NavLink to="/access-history">ประวัติการข้าใช้งาน</NavLink>

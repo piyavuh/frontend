@@ -1,0 +1,16 @@
+.ant-menu-horizontal {
+    font-size: 3ch;
+    color: white;
+    background: #003271;
+    line-height: 46px;
+    white-space: nowrap;
+    border: 0;
+    border-bottom: 1px solid #003271;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.ant-menu-item, .ant-menu-submenu-title {
+    background: #003271;
+    color: white;
+    
+}

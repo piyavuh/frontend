@@ -1,0 +1,44 @@
+.bg-img {
+    /* The image used */
+    background-image: url("images_back.png");
+  
+    
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+   
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+
+    
+.App-logo {
+  height: 50vmin;
+  pointer-events: none;
+}
+
+.App-header {
+      
+      min-height: 120vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  
+    }
+    /*font-size: calc(10px + 2vmin);*/
+
+  .font-style{
+      pointer-events: none;
+      color: #011794;
+      font-family: 'DB Adman X';
+      font-weight:  bolder;
+      font-size: 7.5ch;
+      text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+      -webkit-text-stroke: 0.20px white;
+     
+    }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Buycowcash from '../../../containers/General-product/BuyCow/BuyCowCash/Buycowcash';
+import Buycowcash from '../../../containers/General-product/BuyCow/BuyCowCash/back-menu';
 import Backmenubar from '../../../containers/General-product/BuyCow/BuyCowCash/back-menu';
 
 import styled from 'styled-components';
