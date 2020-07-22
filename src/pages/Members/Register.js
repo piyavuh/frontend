@@ -153,11 +153,9 @@ class RegisterPage extends Component {
         return res.json();
       })
       .then((resData) => {
-        
         var str = "" + resData.data.autoIds[0].memberId;
         var pad = "000000";
         const ans = pad.substring(0, pad.length - str.length) + str;
-        
 
         console.log(typeof ans);
 
@@ -172,7 +170,7 @@ class RegisterPage extends Component {
           
           `,
         };
-    
+
         fetch("http://localhost:8000/graphql", {
           method: "POST",
           body: JSON.stringify(requestBody),
@@ -250,14 +248,10 @@ class RegisterPage extends Component {
                 console.log(err);
               });
           });
-
-        
       })
       .catch((err) => {
         console.log(err);
-      })
-
-    
+      });
   };
 
   render() {
@@ -1046,7 +1040,6 @@ class RegisterPage extends Component {
                 <div style={{ textAlign: "center", paddingBottom: "50px" }}>
                   <div className="form-actions">
                     <button type="submit">Submit</button>
-                   
                   </div>
                 </div>
               </div>

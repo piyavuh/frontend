@@ -11,12 +11,14 @@ import MainNavigation from "./components/Navigation/MainNavigation";
 import Add_officerPage from "./pages/Officer/AddOfficer";
 import Edit_officerPage from "./pages/Officer/EditOfficer";
 import Cal_officerPage from "./pages/Officer/CalculateSalary";
-import DividendandAvgReturnmoney from "./pages/Dividend-Avg_Return_Money/Dividend-Avg_Return_Money";
+import calDividendandAvgReturnmoney from "./pages/Dividend-Avg_Return_Money/Dividend-Avg_Return_Money";
+import DividendandAvgReturnmoney from "./pages/Dividend-Avg_Return_Money/calDividend-Avg_Return_Money";
 
 import EditMember from "./pages/Members/EditMember";
 import AuthContext from "./context/auth-context";
 import Buy_share from "./pages/Share/BuyShare";
 import Sell_share from "./pages/Share/SellShare";
+import Info_share from "./pages/Share/InfoShare";
 
 import Accrual from "./pages/Debt-Accrual/Accrual";
 import Debt from "./pages/Debt-Accrual/Debt";
@@ -29,17 +31,64 @@ import AccessHistory from "./pages/Access-History/AccessHistory";
 
 import "./App.css";
 
+
+
 class App extends Component {
   state = {
+    creating: false,
     token: null,
     userId: null,
+    positionId:null,
+    users: [],
   };
+  componentDidMount() {
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
+    const requestBody = {
+      query: `
+              query {
+                users {
+                  _id
+                  First_name
+                  Last_name
+                  ID_card
+                }
+              }
+            `,
+    };
+
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        const users = resData.data.users;
+        this.setState({ users: users });
+        console.log(resData.data.users);
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
 
   login = (token, userId, tokenExpiration) => {
     this.setState({ token: token, userId: userId });
   };
-  login_off = (token, userId, tokenExpiration) => {
-    this.setState({ token: token, userId: userId });
+  login_off = (token, userId,positionId, tokenExpiration) => {
+    this.setState({ token: token, userId: userId ,positionId:positionId});
   };
   logout = () => {
     this.setState({ token: null, userId: null });
@@ -47,12 +96,14 @@ class App extends Component {
 
   render() {
     return (
+      
       <BrowserRouter>
         <React.Fragment>
           <AuthContext.Provider
             value={{
               token: this.state.token,
               userId: this.state.userId,
+              positionId: this.state.positionId,
               login: this.login,
               login_off: this.login_off,
               logout: this.logout,
@@ -60,6 +111,7 @@ class App extends Component {
           >
             <MainNavigation />
             <main className="main-content">
+             
               <Switch>
                 {this.state.token && <Redirect from="/" to="/stocks" exact />}
                 {this.state.token && (
@@ -73,14 +125,23 @@ class App extends Component {
                 <Route path="/add_officer" component={Add_officerPage} />
                 <Route path="/edit_officer" component={Edit_officerPage} />
                 <Route path="/cal_officer" component={Cal_officerPage} />
-
-                <Route path="/editMember" component={EditMember} />
-                <Route path="/buy_share" component={Buy_share} />
-                <Route path="/sell_share" component={Sell_share} />
+              
                 <Route
                   path="/dividendandAvgReturnmoney"
                   component={DividendandAvgReturnmoney}
                 />
+                <Route
+                  path="/caldividendandAvgReturnmoney"
+                  component={calDividendandAvgReturnmoney}
+                />
+
+
+                <Route path="/editMember" component={EditMember} />
+                <Route path="/buy_share" component={Buy_share} />
+                <Route path="/sell_share" component={Sell_share} />
+                <Route path="/info_share" component={Info_share} />
+               
+                
 
                 <Route path="/accrual" component={Accrual} />
                 <Route path="/debt" component={Debt} />

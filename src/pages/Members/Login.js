@@ -50,9 +50,10 @@ class AuthPage extends Component {
       requestBody = {
         query: `
         query {
-          login_off( id: "${Username}", password: "${Password}"){
+          login_off( username_office: "${Username}", password_office: "${Password}"){
             userId
             token
+            positionId
             tokenExpiration
           }
         }
@@ -90,6 +91,7 @@ class AuthPage extends Component {
           this.context.login_off(
             resData.data.login_off.token,
             resData.data.login_off.userId,
+            resData.data.login_off.positionId,
             resData.data.login_off.tokenExpiration
           );
         }

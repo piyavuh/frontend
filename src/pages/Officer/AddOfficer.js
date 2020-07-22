@@ -61,33 +61,79 @@ function showConfirm() {
         setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
       }).catch(() => console.log("Oops errors!"));
     },
-    onCancel() {},
+    onCancel() { },
   });
 }
 export default class AddOfficer extends Component {
   constructor(props) {
     super(props);
+
     this.idEl = React.createRef();
-    this.passwordEl = React.createRef();
-    this.privilegeEl = React.createRef();
+    this.name_officeEl = React.createRef();
+    this.lastname_officeEl = React.createRef();
+    this.birthday_officeEl = React.createRef();
+    this.idcard_officeEl = React.createRef();
+    this.email_officeEl = React.createRef();
+    this.username_officeEl = React.createRef();
+    this.password_officeEl = React.createRef();
+    this.tellnumber_officeEl = React.createRef();
+    this.tellnumber_office2El = React.createRef();
+    this.facebook_officeEl = React.createRef();
+    this.line_officeEl = React.createRef();
+    this.positionEl = React.createRef();
+    this.type_wageEl = React.createRef();
+    this.bankEl = React.createRef();
+    this.bankIdEl = React.createRef();
+    this.banktypeEl = React.createRef();
+    this.wageEl = React.createRef();
   }
 
   submitHandler = (event) => {
+
     event.preventDefault();
     const id = this.idEl.current.value;
-    const password = this.passwordEl.current.value;
-    const privilege = this.privilegeEl.current.value;
+    const name_office = this.name_officeEl.current.value;
+    const lastname_office = this.lastname_officeEl.current.value;
+    const birthday_office = this.birthday_officeEl.current.value;
+    const idcard_office = this.idcard_officeEl.current.value;
+    const email_office = this.email_officeEl.current.value;
+    const username_office = this.username_officeEl.current.value;
+    const password_office = this.password_officeEl.current.value;
+    const tellnumber_office = this.tellnumber_officeEl.current.value;
+    const tellnumber_office2 = this.tellnumber_office2El.current.value;
+    const facebook_office = this.facebook_officeEl.current.value;
+    const line_office = this.line_officeEl.current.value;
+    const position = this.positionEl.current.value;
+    const type_wage = this.type_wageEl.current.value;
+    const bank = this.bankEl.current.value;
+    const bankId = this.bankIdEl.current.value;
+    const banktype = this.banktypeEl.current.value;
+    const wage = this.wageEl.current.value;
 
-    if (id.trim().length === 0 || password.trim().length === 0) {
-      return;
-    }
-
+console.log(wage);
     let requestBody = {
       query: `
-      mutation {
-        createOfficer(officerInput: {id: "${id}", password: "${password}", privilege: "${privilege}"}) {
+      mutation{
+        createOfficer(officerInput:{id:${id},name_office:"${name_office}",lastname_office:"${lastname_office}",birthday_office:"${birthday_office}",idcard_office:"${idcard_office}",email_office:"${email_office}",username_office:"${username_office}",password_office:"${password_office}",tellnumber_office:"${tellnumber_office}",tellnumber_office2:"${tellnumber_office2}",facebook_office:"${facebook_office}",line_office:"${line_office}",position:"${position}",type_wage:"${type_wage}",bank:"${bank}",bankId:"${bankId}",banktype:"${banktype}",wage:${wage}}){
           _id
           id
+          name_office
+          lastname_office
+          birthday_office
+          idcard_office
+          email_office
+          username_office
+          password_office
+          tellnumber_office
+          tellnumber_office2
+          facebook_office
+          line_office
+          position
+          type_wage
+          bank
+          bankId
+          banktype
+          wage
         }
       }
       `,
@@ -108,6 +154,7 @@ export default class AddOfficer extends Component {
       })
       .then((resData) => {
         console.log(resData);
+
       })
       .catch((err) => {
         console.log(err);
@@ -117,674 +164,662 @@ export default class AddOfficer extends Component {
   render() {
     return (
       <form onSubmit={this.submitHandler}>
-      <div>
-        <Layout>
-          <Header style={{ backgroundColor: "#F0F2F5", marginTop: "50px" }}>
-            <Backmenuber />
-          </Header>
+        <div>
+          <Layout>
+            <Header style={{ backgroundColor: "#F0F2F5", marginTop: "50px" }}>
+              <Backmenuber />
+            </Header>
 
-          <Addofficer>
-            <div className="t-header " style={{ marginTop: "40px" }}>
-              <c>เพิ่มข้อมูลบุคลากร </c>
-            </div>
-            <div className="t-content">
-              <Form.Item
-                style={{ fontSize: "3ch", marginTop: "15px" }}
-                name="officer_code"
-              >
-                <label className="t-inputcode">รหัสบุคลากร</label>
-                <Input
-                  placeholder="00000"
-                  style={{
-                    marginLeft: "10px",
-                    width: "100px",
-                    fontSize: "2.4ch",
-                    borderRadius: "0.5em",
-                  }}
-                />
-              </Form.Item>
-              <Content style={{ padding: "0 50px", margin: "30px 0" }}>
-                <Form>
-                  <div className="modal-header">
-                    <c>ข้อมูลเบื้องต้น </c>
-                  </div>
-                  <div className="modal-content ">
-                    <Row gutter={22} style={{ marginTop: "20px" }}>
-                      <Col span={2} />
+            <Addofficer>
+              <div className="t-header " style={{ marginTop: "40px" }}>
+                <c>เพิ่มข้อมูลบุคลากร </c>
+              </div>
+              <div className="t-content">
+                <Form.Item
+                  style={{ fontSize: "3ch", marginTop: "15px" }}
+                  name="officer_code"
+                >
+                  <label className="t-inputcode">รหัสบุคลากร</label>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> คำนำหน้า :
+                  <input
+                    className="from-input"
+                    id="id"
+                    ref={this.idEl}
+                    placeholder="00000"
+                  ></input>
+                </Form.Item>
+                <Content style={{ padding: "0 50px", margin: "30px 0" }}>
+                  <Form>
+                    <div className="modal-header">
+                      <c>ข้อมูลเบื้องต้น </c>
+                    </div>
+                    <div className="modal-content ">
+                      <Row gutter={22} style={{ marginTop: "20px" }}>
+                        <Col span={2} />
+
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> คำนำหน้า :
                           </label>
-                          <Form.Item
-                            name="prefix"
-                            rules={[
-                              { required: true, message: "กรุณาเลือกคำนำหน้า" },
-                            ]}
-                          >
-                            <Select
-                              style={{ fontSize: "3ch" }}
-                              placeholder="กรุณาเลือกคำนำหน้า"
-                              allowClear
+                            <Form.Item
+                              name="prefix"
+                              rules={[
+                                { required: true, message: "กรุณาเลือกคำนำหน้า" },
+                              ]}
                             >
-                              <Option value="Mr.">นาย</Option>
-                              <Option value="Mrs.">นาง</Option>
-                              <Option value="Ms.">นางสาว</Option>
-                            </Select>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                              <Select
+                                style={{ fontSize: "3ch" }}
+                                placeholder="กรุณาเลือกคำนำหน้า"
+                                allowClear
+                              >
+                                <Option value="Mr.">นาย</Option>
+                                <Option value="Mrs.">นาง</Option>
+                                <Option value="Ms.">นางสาว</Option>
+                              </Select>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> ชื่อ :
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> ชื่อ :
                           </label>
-                          <Form.Item
-                            name={["name"]}
-                            rules={[
-                              { required: true, message: "กรุณากรอกชื่อ" },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="กรุณากรอกชื่อ"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                            <Form.Item
+                              name={["name"]}
+                              rules={[
+                                { required: true, message: "กรุณากรอกชื่อ" },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="name_office"
+                                    ref={this.name_officeEl}
+                                    placeholder="กรุณากรอกชื่อ"
+                                  ></input>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> นามสกุล :
-                          </label>
-                          <Form.Item
-                            name="surname"
-                            rules={[
-                              { required: true, message: "กรุณากรอกนามสกุล" },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="กรุณากรอกนามสกุล"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> เพศ :
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> นามสกุล :
                           </label>
-                          <Form.Item
-                            name="gender"
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรูณาเลือกเพศของท่าน",
-                              },
-                            ]}
-                          >
-                            <Col>
-                              <div style={style}>
-                                <Radio.Group>
-                                  <Radio
-                                    style={{ fontSize: "3ch" }}
-                                    value="male"
-                                  >
-                                    เพศชาย
+                            <Form.Item
+                              name="surname"
+                              rules={[
+                                { required: true, message: "กรุณากรอกนามสกุล" },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="lastname_office"
+                                    ref={this.lastname_officeEl}
+                                    placeholder="กรุณากรอกนามสกุล"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> เพศ :
+                          </label>
+                            <Form.Item
+                              name="gender"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรูณาเลือกเพศของท่าน",
+                                },
+                              ]}
+                            >
+                              <Col>
+                                <div style={style}>
+                                  <Radio.Group>
+                                    <Radio
+                                      style={{ fontSize: "3ch" }}
+                                      value="male"
+                                    >
+                                      เพศชาย
                                   </Radio>
-                                  <Radio
-                                    style={{ fontSize: "3ch" }}
-                                    value="female"
-                                  >
-                                    เพศหญิง
+                                    <Radio
+                                      style={{ fontSize: "3ch" }}
+                                      value="female"
+                                    >
+                                      เพศหญิง
                                   </Radio>
-                                </Radio.Group>
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                                  </Radio.Group>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> วัน/เดือน/ปีเกิด
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> วัน/เดือน/ปีเกิด
                             :
                           </label>
-                          <Form.Item
-                            name={["birthday"]}
-                            label=""
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรูณาระบุวันเกิดของท่าน",
-                              },
-                            ]}
-                          >
-                            <Col>
-                              <div style={style}>
-                                <DatePicker
-                                  style={{ borderRadius: "0.5em" }}
-                                  onChange={onChange}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-                    </Row>
+                            <Form.Item
+                              name={["birthday"]}
+                              label=""
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรูณาระบุวันเกิดของท่าน",
+                                },
+                              ]}
+                            >
+                              <Col>
+                                <div style={style}>
 
-                    <Row gutter={22} style={{ paddingBottom: "10px" }}>
-                      <Col span={2} />
+                                  <input
+                                    className="from-input"
+                                    type="date"
+                                    id="birthday_office"
+                                    ref={this.birthday_officeEl}
+                                    placeholder="กรุณากรอกระบุวันเกิด"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+                      </Row>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> เลขบัตรประชาชน :
+                      <Row gutter={22} style={{ paddingBottom: "10px" }}>
+                        <Col span={2} />
+
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> เลขบัตรประชาชน :
                           </label>
-                          <Form.Item
-                            name="identity_card"
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรุณากรอกหมายเลขบัตรประชาชน",
-                              },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="เลขบัตรประชาชน 13 หลัก"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            {" "}
+                            <Form.Item
+                              name="identity_card"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรุณากรอกหมายเลขบัตรประชาชน",
+                                },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="idcard_office"
+                                    ref={this.idcard_officeEl}
+                                    placeholder="เลขบัตรประชาชน 13 หลัก"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              {" "}
                             E-mail :
                           </label>
-                          <Form.Item
-                            name="E-mail"
-                            rules={[{ required: false }]}
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="user@example.com"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                            <Form.Item
+                              name="E-mail"
+                              rules={[{ required: false }]}
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="email_office"
+                                    ref={this.email_officeEl}
+                                    placeholder="user@example.com"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> Username :
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> Username :
                           </label>
-                          <Form.Item
-                            name="username"
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรุณากรอกชื่อผู้ใช้งาน",
-                              },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <input
-                                  className="from-input"
-                                  id="id"
-                                  ref={this.idEl}
-                                  placeholder="๊ชื่อผู้ใช้งาน"
-                                ></input>
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> Password :
-                          </label>
-                          <Form.Item
-                            name="password"
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรุณากรอกรหัสผ่าน",
-                              },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <input
-                                  className="from-input"
-                                  id="password"
-                                  ref={this.passwordEl}
-                                  placeholder="๊อย่างน้อย 8 ตัวอักษร"
-                                ></input>
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> Confirm Password
-                            :
-                          </label>
-                          <Form.Item
-                            name="confirm"
-                            dependencies={["password"]}
-                            hasFeedback
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรุณายืนยันรหัสผ่าน",
-                              },
-                              ({ getFieldValue }) => ({
-                                validator(rule, value) {
-                                  if (
-                                    !value ||
-                                    getFieldValue("password") === value
-                                  ) {
-                                    return Promise.resolve();
-                                  }
-                                  return Promise.reject(
-                                    "รหัสผ่านของคุณป้อนไม่ตรงก้น"
-                                  );
+                            <Form.Item
+                              name="username"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรุณากรอกชื่อผู้ใช้งาน",
                                 },
-                              }),
-                            ]}
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input.Password
-                                  placeholder="๊ยืนยันรหัสผ่าน"
-                                  style={{
-                                    width: "600%",
-                                    fontSize: "2.4ch",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row gutter={22} style={{ paddingBottom: "10px" }}>
-                      <Col span={2} />
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="username_office"
+                                    ref={this.username_officeEl}
+                                    placeholder="๊ชื่อผู้ใช้งาน"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> เบอร์โทรศัพท์ :
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> Password :
                           </label>
-                          <Form.Item
-                            name="phone"
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรุณากรอกเบอร์โทรศพท์",
-                              },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="00-0000-0000"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}> </c> เบอร์โทรศัพท์สำรอง
+                            <Form.Item
+                              name="password"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรุณากรอกรหัสผ่าน",
+                                },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="password_office"
+                                    ref={this.password_officeEl}
+                                    placeholder="๊อย่างน้อย 8 ตัวอักษร"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> Confirm Password
                             :
                           </label>
-                          <Form.Item
-                            name="alternate_phone"
-                            rules={[{ required: false }]}
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="๊00-0000-0000"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                            <Form.Item
+                              name="confirm"
+                              dependencies={["password"]}
+                              hasFeedback
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรุณายืนยันรหัสผ่าน",
+                                },
+                                ({ getFieldValue }) => ({
+                                  validator(rule, value) {
+                                    if (
+                                      !value ||
+                                      getFieldValue("password") === value
+                                    ) {
+                                      return Promise.resolve();
+                                    }
+                                    return Promise.reject(
+                                      "รหัสผ่านของคุณป้อนไม่ตรงก้น"
+                                    );
+                                  },
+                                }),
+                              ]}
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <Input.Password
+                                    placeholder="๊ยืนยันรหัสผ่าน"
+                                    style={{
+                                      width: "600%",
+                                      fontSize: "2.4ch",
+                                      borderRadius: "0.5em",
+                                    }}
+                                  />
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <FontAwesomeIcon
-                              style={{
-                                color: "#0066ff",
-                                width: "20px",
-                                height: "20px",
-                              }}
-                              icon={faFacebookSquare}
-                            />{" "}
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row gutter={22} style={{ paddingBottom: "10px" }}>
+                        <Col span={2} />
+
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> เบอร์โทรศัพท์ :
+                          </label>
+                            <Form.Item
+                              name="phone"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรุณากรอกเบอร์โทรศพท์",
+                                },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="tellnumber_office"
+                                    ref={this.tellnumber_officeEl}
+                                    placeholder="00-0000-0000"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}> </c> เบอร์โทรศัพท์สำรอง
+                            :
+                          </label>
+                            <Form.Item
+                              name="alternate_phone"
+                              rules={[{ required: false }]}
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="tellnumber_office2"
+                                    ref={this.tellnumber_office2El}
+                                    placeholder="00-0000-0000"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <FontAwesomeIcon
+                                style={{
+                                  color: "#0066ff",
+                                  width: "20px",
+                                  height: "20px",
+                                }}
+                                icon={faFacebookSquare}
+                              />{" "}
                             Facebook :
                           </label>
-                          <Form.Item
-                            name="facebook"
-                            rules={[{ required: false }]}
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="๊facebook"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                            <Form.Item
+                              name="facebook"
+                              rules={[{ required: false }]}
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="facebook_office"
+                                    ref={this.facebook_officeEl}
+                                    placeholder="๊facebook"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <FontAwesomeIcon
-                              style={{
-                                color: "#4CAF50",
-                                width: "20px",
-                                height: "20px",
-                              }}
-                              icon={faLine}
-                            />{" "}
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <FontAwesomeIcon
+                                style={{
+                                  color: "#4CAF50",
+                                  width: "20px",
+                                  height: "20px",
+                                }}
+                                icon={faLine}
+                              />{" "}
                             ID Line :
                           </label>
-                          <Form.Item
-                            name="id_line"
-                            rules={[{ required: false }]}
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="๊id line"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-                </Form>
-                <br />
-                <Boxmenubar2 />
-                <br />
-                <Form>
-                  <div className="modal-header">
-                    <c>ข้อมูลที่ทำงาน </c>
-                  </div>
-                  <div className="modal-content ">
-                    <Row gutter={22} style={{ marginTop: "20px" }}>
-                      <Col span={2} />
+                            <Form.Item
+                              name="id_line"
+                              rules={[{ required: false }]}
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="line_office"
+                                    ref={this.line_officeEl}
+                                    placeholder="id line"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Form>
+                  <br />
+                  <Boxmenubar2 />
+                  <br />
+                  <Form>
+                    <div className="modal-header">
+                      <c>ข้อมูลที่ทำงาน </c>
+                    </div>
+                    <div className="modal-content ">
+                      <Row gutter={22} style={{ marginTop: "20px" }}>
+                        <Col span={2} />
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <Form.Item>
-                            <Col span={4}>
-                              <Uploadimg />
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                        <Col span={4}>
+                          <div style={style}>
+                            <Form.Item>
+                              <Col span={4}>
+                                <Uploadimg />
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4} style={{ marginTop: "40px" }}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> ตำแหน่ง :
+                        <Col span={4} style={{ marginTop: "40px" }}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> ตำแหน่ง :
                           </label>
-                          <Form.Item
-                            name={["position"]}
-                            hasFeedback
-                            rules={[
-                              { required: true, message: "กรุณากรอกตำแหน่ง" },
-                            ]}
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <input
-                                  className="from-input"
-                                  id="privileg"
-                                  ref={this.privilegeEl}
-                                  placeholder="กรุณากรอกตำแหน่ง"
-                                ></input>
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                            <Form.Item
+                              name={["position"]}
+                              hasFeedback
+                              rules={[
+                                { required: true, message: "กรุณากรอกตำแหน่ง" },
+                              ]}
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="position"
+                                    ref={this.positionEl}
+                                    placeholder="กรุณากรอกตำแหน่ง"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4} style={{ marginTop: "40px" }}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> เงินเดือน (บาท) :
+                        <Col span={4} style={{ marginTop: "40px" }}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> ประเภทเงินเดือน :
                           </label>
-                          <Form.Item
-                            name={["salary"]}
-                            rules={[
-                              { required: true, message: "กรุณากรอกเงินเดือน" },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <InputNumber
-                                  defaultValue={1000}
-                                  formatter={(value) =>
-                                    `${value}`.replace(
-                                      /\B(?=(\d{3})+(?!\d))/g,
-                                      ","
-                                    )
-                                  }
-                                  parser={(value) =>
-                                    value.replace(/\$\s?|(,*)/g, "")
-                                  }
-                                  onChange={onChange}
-                                  style={{ width: "600%", fontSize: "2.4ch" }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                            <Form.Item
+                              name={["salary"]}
+                              rules={[
+                                { required: true, message: "กรุณากรอกประเภทเงินเดือน" },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="type_wage"
+                                    ref={this.type_wageEl}
+                                    placeholder="กรูณากรอกประเภทเงินเดือน"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4} style={{ marginTop: "40px" }}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> บัญชีธนาคาร :
+                        <Col span={4} style={{ marginTop: "40px" }}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}> </c> เงินเดือน (บาท) :
                           </label>
-                          <Form.Item
-                            name="bank_account"
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรุณากรอกบัญชีธนาคาร",
-                              },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="กรุณากรอกบัญชีธนาคาร"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                            <Form.Item name="Fax" rules={[{ required: false }]}>
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="wage"
+                                    ref={this.wageEl}
+                                    placeholder="กรุณากรอกเงินเดือน"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
 
-                      <Col span={4} style={{ marginTop: "40px" }}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> เลขที่บัญชีธนาคาร
+                        <Col span={4} style={{ marginTop: "40px" }}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> บัญชีธนาคาร :
+                          </label>
+                            <Form.Item
+                              name="bank_account"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรุณากรอกบัญชีธนาคาร",
+                                },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="bank"
+                                    ref={this.bankEl}
+                                    placeholder="กรุณากรอกบัญชีธนาคาร"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+                      </Row>
+
+                      <Row gutter={22} style={{ paddingBottom: "10px" }}>
+                        <Col span={2} />
+
+                        <Col span={4}>
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> ประเภทบัญชี :
+                          </label>
+                            <Form.Item
+                              name="account_type"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "กรุณากรอกประเภทบัญชี",
+                                },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
+                                  <input
+                                    className="from-input"
+                                    id="banktype"
+                                    ref={this.banktypeEl}
+                                    placeholder="กรุณากรอกประเภทบัญชี"
+                                  ></input>
+                                </div>
+                              </Col>
+                            </Form.Item>
+
+                          </div>
+                        </Col>
+                        <Col span={4} >
+                          <div style={style}>
+                            <label style={{ fontSize: "3ch", color: "black" }}>
+                              <c style={{ color: "red" }}>* </c> เลขที่บัญชีธนาคาร
                             :
                           </label>
-                          <Form.Item
-                            name="bank_number"
-                            rules={[
-                              { required: true, message: "เลขที่บัญชีธนาคาร" },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="กรุณากรอกเลขที่บัญชีธนาคาร"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row gutter={22} style={{ paddingBottom: "10px" }}>
-                      <Col span={2} />
+                            <Form.Item
+                              name="bank_number"
+                              rules={[
+                                { required: true, message: "เลขที่บัญชีธนาคาร" },
+                              ]}
+                              hasFeedback
+                            >
+                              <Col span={4}>
+                                <div style={style}>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}>* </c> ประเภทบัญชี :
-                          </label>
-                          <Form.Item
-                            name="account_type"
-                            rules={[
-                              {
-                                required: true,
-                                message: "กรุณากรอกประเภทบัญชี",
-                              },
-                            ]}
-                            hasFeedback
-                          >
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="กรุณากรอกประเภทบัญชี"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
+                                  <input
+                                    className="from-input"
+                                    id="bankId"
+                                    ref={this.bankIdEl}
+                                    placeholder="กรุณากรอกเลขที่บัญชีธนาคาร"
+                                  ></input>
 
-                      <Col span={4}>
-                        <div style={style}>
-                          <label style={{ fontSize: "3ch", color: "black" }}>
-                            <c style={{ color: "red" }}> </c> Fax :
-                          </label>
-                          <Form.Item name="Fax" rules={[{ required: false }]}>
-                            <Col span={4}>
-                              <div style={style}>
-                                <Input
-                                  placeholder="กรุณากรอกหมายเลขแฟกซ์"
-                                  style={{
-                                    width: "600%",
-                                    borderRadius: "0.5em",
-                                  }}
-                                />
-                              </div>
-                            </Col>
-                          </Form.Item>
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-                </Form>
-              </Content>
-              <div style={{ textAlign: "center" }}>
-                <Button type="primary" danger style={{ fontSize: "3.5ch" }}>
-                  ยกเลิก
+                                </div>
+                              </Col>
+                            </Form.Item>
+                          </div>
+                        </Col>
+
+                      </Row>
+                    </div>
+                  </Form>
+                </Content>
+                <div style={{ textAlign: "center" }}>
+                  <Button type="primary" danger style={{ fontSize: "3.5ch" }}>
+                    ยกเลิก
                 </Button>
-                <button type="submit">บันทึก</button>
+                  <button type="submit">บันทึก</button>
+                </div>
               </div>
-            </div>
-          </Addofficer>
-        </Layout>
-      </div>
+            </Addofficer>
+          </Layout>
+        </div>
       </form>
     );
   }

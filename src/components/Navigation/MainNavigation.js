@@ -32,7 +32,7 @@ const mainNavigation = (props) => (
                 </React.Fragment>
               )}
 
-              {context.token && (
+              {context.token && context.positionId == "document" && (
                 <React.Fragment>
                   <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">
@@ -49,11 +49,54 @@ const mainNavigation = (props) => (
                   </li>
                 </React.Fragment>
               )}
-              {context.token && (
+              {context.token && context.positionId == "admin" && (
                 <React.Fragment>
                   <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">
-                      การจัดกาบุคลากร
+                      สมาชิก
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/editMember">ตรวจสอบแก้ใข</NavLink>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              )}
+
+              {context.token && context.positionId == "admin" && (
+                <React.Fragment>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                      หุ้น
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/info_share">ข้อมูลหุ้น</NavLink>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && context.positionId == "admin" && (
+                <React.Fragment>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                      การจัดการบุคลากร
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/edit_officer">ตรวจสอบบุคลากร</NavLink>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && context.positionId == "document" && (
+                <React.Fragment>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                      การจัดการบุคลากร
                     </a>
                     <div class="dropdown-content">
                       <a>
@@ -62,15 +105,29 @@ const mainNavigation = (props) => (
                       <a>
                         <NavLink to="/edit_officer">ตรวจสอบบุคลากร</NavLink>
                       </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && context.positionId == "accounting" && (
+                <React.Fragment>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                      การจัดการบุคลากร
+                    </a>
+                    <div class="dropdown-content">
                       <a>
                         <NavLink to="/cal_officer">คำนวณเงินเดือน</NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/edit_officer">ตรวจสอบบุคลากร</NavLink>
                       </a>
                     </div>
                   </li>
                 </React.Fragment>
               )}
 
-              {context.token && (
+              {context.token && context.positionId == "finance" && (
                 <React.Fragment>
                   <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">
@@ -83,16 +140,47 @@ const mainNavigation = (props) => (
                       <a>
                         <NavLink to="/sell_share">ขายหุ้น</NavLink>
                       </a>
+                      <a>
+                        <NavLink to="/info_share">ข้อมูลหุ้น</NavLink>
+                      </a>
                     </div>
                   </li>
                 </React.Fragment>
               )}
-              {context.token && (
+              {context.token && context.positionId == "admin" && (
                 <React.Fragment>
-                  <li>
-                    <NavLink to="/DividendandAvgReturnmoney">
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
                       เงินปันผล/เงินเฉลี่ยคืน
-                    </NavLink>
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/dividendandAvgReturnmoney">
+                          ข้อมูลเงินปันผล/เงินเฉลี่ยคืน
+                        </NavLink>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              )}
+              {context.token && context.positionId == "accounting" && (
+                <React.Fragment>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">
+                      เงินปันผล/เงินเฉลี่ยคืน
+                    </a>
+                    <div class="dropdown-content">
+                      <a>
+                        <NavLink to="/caldividendandAvgReturnmoney">
+                          คำนวนเงินปันผล/เงินเฉลี่ยคืน
+                        </NavLink>
+                      </a>
+                      <a>
+                        <NavLink to="/dividendandAvgReturnmoney">
+                          ข้อมูลเงินปันผล/เงินเฉลี่ยคืน
+                        </NavLink>
+                      </a>
+                    </div>
                   </li>
                 </React.Fragment>
               )}
@@ -116,7 +204,7 @@ const mainNavigation = (props) => (
                   </li>
                 </React.Fragment>
               )}
-              {context.token && (
+              {context.token && context.positionId == "accounting" && (
                 <React.Fragment>
                   <li>
                     <NavLink to="/receipt">การเงิน</NavLink>
@@ -130,14 +218,14 @@ const mainNavigation = (props) => (
                   </li>
                 </React.Fragment>
               )}
-              {context.token && (
+              {context.token && context.positionId == "manager" && (
                 <React.Fragment>
                   <li>
                     <NavLink to="/approvey">การอนุมัติ</NavLink>
                   </li>
                 </React.Fragment>
               )}
-              {context.token && (
+              {context.token && context.positionId == "manager" &&  (
                 <React.Fragment>
                   <li>
                     <NavLink to="/access-history">ประวัติการข้าใช้งาน</NavLink>

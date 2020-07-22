@@ -4,3 +4,10 @@
 .ant-form-item-label {
    width: 80px;
 }
+.sizedashbord {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 48ch;
+    margin-top: 10%;
+  }
+  
